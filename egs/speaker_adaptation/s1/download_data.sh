@@ -9,9 +9,9 @@ if [ "$download_data" = true ]; then
     #data_url=http://homepages.inf.ed.ac.uk/jyamagis/release/VCTK-Corpus.tar.gz
     data_url=http://datashare.is.ed.ac.uk/download/DS_10283_3443.zip
     if hash wget 2>/dev/null; then
-        wget $data_url
+        wget $data_url 
     elif hash curl 2>/dev/null; then
-        curl -O $data_url
+        curl -O $data_url 
     else
         echo "please download the data from $data_url"
         exit 1
@@ -28,4 +28,3 @@ fi
 
 # Uncomment the below line if you want to delete the tar file
 # rm -rf VCTK-Corpus.tar.gz
-
