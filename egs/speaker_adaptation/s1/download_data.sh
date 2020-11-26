@@ -23,6 +23,7 @@ if [ "$extract_data" = true ]; then
     # It's recommend to check the README and speaker-info.txt files
     # after extraction
     unzip DS_10283_3443.zip
+    unzip VCTK-Corpus-0.92.zip  -d VCTK-Corpus
     #tar -zxvf VCTK-Corpus.tar.gz
 fi
 
