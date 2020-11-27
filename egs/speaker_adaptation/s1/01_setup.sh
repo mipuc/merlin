@@ -5,7 +5,7 @@ if test "$#" -ne 1; then
     echo "Usage:"
     echo "./01_setup.sh <voice_name>"
     echo ""
-    echo "Give a voice name eg., slt_arctic"
+    echo "Give a voice name eg., vctk_avm"
     echo "################################"
     exit 1
 fi
@@ -38,6 +38,16 @@ if [ "$setup_data" = true ]; then
         cp VCTK-Corpus/wav48/$spkid/*.wav database_$spkid/wav
         cp VCTK-Corpus/txt/$spkid/*.txt database_$spkid/txt
     done
+
+    #rm mic2 data
+    rm -rf database/wav/*mic2.wav
+    #mv mic1 data to original name
+    echo "renaming wav files"
+    for f in database/wav/*.wav; 
+    	do g=`echo $f | sed 's/_mic1//g'`; 
+    	mv $f $g;
+    done
+
 fi
 
 current_working_dir=$(pwd)
@@ -86,7 +96,7 @@ echo "######################################" >> $global_config_file
 echo "" >> $global_config_file
 
 echo "Voice=${voice_name}" >> $global_config_file
-echo "Labels=state_align" >> $global_config_file
+echo "Labels=phone_align" >> $global_config_file
 echo "QuestionFile=questions-radio_dnn_416.hed" >> $global_config_file
 echo "Vocoder=WORLD" >> $global_config_file
 echo "SamplingFreq=48000" >> $global_config_file
@@ -109,15 +119,15 @@ echo "############# TOOLS ##################" >> $global_config_file
 echo "######################################" >> $global_config_file
 echo "" >> $global_config_file
 
-#echo "ESTDIR=${merlin_dir}/tools/speech_tools" >> $global_config_file
-#echo "FESTDIR=${merlin_dir}/tools/festival" >> $global_config_file
-#echo "FESTVOXDIR=${merlin_dir}/tools/festvox" >> $global_config_file
-echo "ESTDIR=/l/SRC/speech_tools/bin" >> $global_config_file
-echo "FESTDIR=/l/SRC/festival_2_4/festival" >> $global_config_file
-echo "FESTVOXDIR=/l/SRC/festvox/" >> $global_config_file
+echo "ESTDIR=${merlin_dir}/tools/speech_tools/bin" >> $global_config_file
+echo "FESTDIR=${merlin_dir}/tools/festival" >> $global_config_file
+echo "FESTVOXDIR=${merlin_dir}/tools/festvox" >> $global_config_file
+#echo "ESTDIR=/l/SRC/speech_tools/bin" >> $global_config_file
+#echo "FESTDIR=/l/SRC/festival_2_4/festival" >> $global_config_file
+#echo "FESTVOXDIR=/l/SRC/festvox/" >> $global_config_file
 echo "" >> $global_config_file
-#echo "HTKDIR=${merlin_dir}/tools/bin/htk" >> $global_config_file
-echo "HTKDIR=/l/SRC/htk-3.5/bin" >> $global_config_file
+echo "HTKDIR=${merlin_dir}/tools/bin/htk" >> $global_config_file
+#echo "HTKDIR=/l/SRC/htk-3.5/bin" >> $global_config_file
 echo "" >> $global_config_file
 
 echo "Step 1:"

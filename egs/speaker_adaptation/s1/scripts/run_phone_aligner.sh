@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+echo "here"
+
 if test "$#" -ne 4; then
     echo "Usage: ./run_phone_aligner.sh <path_to_wav_dir> <path_to_text_dir> <path_to_labels_dir> <path_to_global_conf_file>"
     exit 1
@@ -28,11 +30,16 @@ if [[ ! -d "${ESTDIR}" ]] || [[ ! -d "${FESTDIR}" ]] || [[ ! -d "${FESTVOXDIR}" 
     exit 1
 fi
 
+export ESTDIR=${ESTDIR}
+export FESTVOXDIR=${FESTVOXDIR}
+
 ### do forced alignment using ehmm in clustergen setup
 mkdir -p $lab_dir
 cd $lab_dir
-mkdir cmu_us_${Voice}
+mkdir -p cmu_us_${Voice}
 cd cmu_us_${Voice}
+
+echo "here"
 
 $FESTVOXDIR/src/clustergen/setup_cg cmu us ${Voice} 
 
