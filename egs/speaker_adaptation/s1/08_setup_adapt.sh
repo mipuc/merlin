@@ -78,7 +78,8 @@ echo "######################################" >> $global_config_file
 echo "" >> $global_config_file
 
 echo "Voice=${voice_name}" >> $global_config_file
-echo "Labels=state_align" >> $global_config_file
+#echo "Labels=state_align" >> $global_config_file
+echo "Labels=phone_align" >> $global_config_file
 echo "QuestionFile=questions-radio_dnn_416.hed" >> $global_config_file
 echo "Vocoder=WORLD" >> $global_config_file
 echo "SamplingFreq=48000" >> $global_config_file
@@ -104,12 +105,12 @@ echo "############# TOOLS ##################" >> $global_config_file
 echo "######################################" >> $global_config_file
 echo "" >> $global_config_file
 
-#echo "ESTDIR=${merlin_dir}/tools/speech_tools" >> $global_config_file
-#echo "FESTDIR=${merlin_dir}/tools/festival" >> $global_config_file
-#echo "FESTVOXDIR=${merlin_dir}/tools/festvox" >> $global_config_file
-echo "ESTDIR=/l/SRC/speech_tools/bin" >> $global_config_file
-echo "FESTDIR=/l/SRC/festival_2_4/festival" >> $global_config_file
-echo "FESTVOXDIR=/l/SRC/festvox/" >> $global_config_file
+echo "ESTDIR=${merlin_dir}/tools/speech_tools" >> $global_config_file
+echo "FESTDIR=${merlin_dir}/tools/festival" >> $global_config_file
+echo "FESTVOXDIR=${merlin_dir}/tools/festvox" >> $global_config_file
+#echo "ESTDIR=/l/SRC/speech_tools/bin" >> $global_config_file
+#echo "FESTDIR=/l/SRC/festival_2_4/festival" >> $global_config_file
+#echo "FESTVOXDIR=/l/SRC/festvox/" >> $global_config_file
 echo "" >> $global_config_file
 #echo "HTKDIR=${merlin_dir}/tools/bin/htk" >> $global_config_file
 echo "HTKDIR=/l/SRC/htk-3.5/bin" >> $global_config_file
