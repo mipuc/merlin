@@ -108,6 +108,38 @@ class kerasModels(object):
         # Compile the model
         self.compile_model()
 
+    def define_feedforward_multitarget_model(self,n_out1):
+        seed = 12345
+        np.random.seed(seed)
+
+        inputdata = keras.Input(shape=(self.n_in,))
+        # add hidden layers
+        x =  Dense( self.hidden_layer_size[1],activation=self.hidden_layer_type[1],kernel_initializer="normal")(inputdata)
+        x = Dropout(self.dropout_rate)(x)
+
+        for i in range(2,self.n_layers):
+            x =  Dense( self.hidden_layer_size[i],activation=self.hidden_layer_type[i],kernel_initializer="normal")(x)
+            x = Dropout(self.dropout_rate)(x)
+
+        # add output layers
+        #standard features
+        out1_dim=self.n_out-n_out1
+        #pole zero features
+        out2_dim=n_out1
+
+        stdfeat = Dense(out1_dim,activation=self.output_type.lower(),kernel_initializer="normal")(x)
+        polezero = Dense(out2_dim,activation=self.output_type.lower(), kernel_initializer="normal")(x)
+
+        # Instantiate an end-to-end model predicting both std and polezero features
+        self.model = keras.Model(inputs=inputdata,outputs=[stdfeat, polezero])
+
+        #compile model
+        self.model.compile(optimizer=self.optimizer,loss=[self.loss_function,self.loss_function],metrics=['accuracy'])
+
+        #print model summary
+        self.model.summary()
+
+
     def define_sequence_model(self):
         seed = 12345
         np.random.seed(seed)
